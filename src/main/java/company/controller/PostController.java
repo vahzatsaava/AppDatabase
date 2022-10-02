@@ -1,12 +1,16 @@
 package company.controller;
 
 import company.model.Post;
-import company.repository.sql_connect.PostConnection;
+import company.repository.jdbc.JdbcPostRepositoryImpl;
 
 import java.util.List;
 
 public class PostController {
-    private final PostConnection connection = new PostConnection();
+    private JdbcPostRepositoryImpl connection ;
+
+    public PostController() {
+        connection = new JdbcPostRepositoryImpl();
+    }
 
     public Post createPost(Post post) {
         return connection.save(post);

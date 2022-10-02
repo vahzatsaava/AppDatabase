@@ -9,7 +9,7 @@
         <tagDatabase tag="db_init"/>
     </changeSet>
     <changeSet id="create_posts" author="Vazha">
-        <sqlFile path="src/main/resources/post_sql"/>
+        <sqlFile path="src/main/resources/post_sql.sql"/>
     </changeSet>
 
 </databaseChangeLog>

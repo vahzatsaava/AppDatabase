@@ -3,9 +3,12 @@ package company.view;
 import company.controller.PostController;
 import company.model.Label;
 import company.model.Post;
+import liquibase.integration.ant.DropAllTask;
 
 import javax.xml.stream.events.Characters;
+import java.sql.Date;
 import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalTime;
 import java.util.*;
 
@@ -18,9 +21,9 @@ public class PostView implements View<Post> {
         System.out.println("Type the content ");
         String content = scanner.next();
         System.out.println("Type time start");
-        Time start = generateTime();
+        Timestamp start = generateTime();
         System.out.println("Type time finish");
-        Time finish = generateTime();
+        Timestamp finish = generateTime();
         List<Label> labels = generateLabels();
         return controller.createPost(new Post(content, start, finish, labels));
     }
@@ -45,9 +48,9 @@ public class PostView implements View<Post> {
         System.out.println("Type the content");
         String content = scanner.next();
         System.out.println("Type time start");
-        Time start = generateTime();
+        Timestamp start = generateTime();
         System.out.println("Type time finish");
-        Time finish = generateTime();
+        Timestamp finish = generateTime();
         List<Label> labels = generateLabels();
         return controller.updatePost(new Post(id, content, start, finish, labels));
     }
@@ -64,9 +67,27 @@ public class PostView implements View<Post> {
         scanner.close();
     }
 
-    private Time generateTime() {
+    private Timestamp generateTime() {
         String dataFormat = "";
         while (true) {
+            System.out.println("Type years");
+            String year = scanner.next();
+            if (year.length() != 4) {
+                System.out.println("Wrong values of hours");
+                continue;
+            }
+            System.out.println("Type months");
+            String month = scanner.next();
+            if (month.length() != 2) {
+                System.out.println("Wrong values of months");
+                continue;
+            }
+            System.out.println("Type days");
+            String day = scanner.next();
+            if (day.length() != 2) {
+                System.out.println("Wrong values of days");
+                continue;
+            }
             System.out.println("Type hours");
             String hour = scanner.next();
 
@@ -80,18 +101,18 @@ public class PostView implements View<Post> {
                 System.out.println("Wrong values of minutes");
                 continue;
             }
-            ;
             System.out.println("Type seconds");
             String seconds = scanner.next();
             if (seconds.length() != 2 || !Character.isDigit(seconds.charAt(0)) || !Character.isDigit(seconds.charAt(1))) {
                 System.out.println("Wrong values of seconds");
                 continue;
             }
-            ;
-            dataFormat = String.format("%s:%s:%s", hour, minutes, seconds);
+
+            dataFormat = String.format("%s-%s-%s %s:%s:%s",year,month,day, hour, minutes, seconds);
             break;
         }
-        return Time.valueOf(dataFormat);
+
+        return Timestamp.valueOf(dataFormat);
     }
 
     private List<Label> generateLabels() {

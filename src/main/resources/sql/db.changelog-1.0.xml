@@ -9,7 +9,7 @@
         <tagDatabase tag="db_init"/>
     </changeSet>
     <changeSet id="create_label" author="Vazha">
-        <sqlFile path="src/main/resources/sql_for_label"/>
+        <sqlFile path="src/main/resources/sql_for_label.sql"/>
     </changeSet>
 
 </databaseChangeLog>

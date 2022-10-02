@@ -1,12 +1,16 @@
 package company.controller;
 
 import company.model.Writer;
-import company.repository.sql_connect.WriterConnection;
+import company.repository.jdbc.JdbcWriterRepositoryImpl;
 
 import java.util.List;
 
 public class WriterController {
-    private final WriterConnection connection = new WriterConnection();
+    private JdbcWriterRepositoryImpl connection;
+
+    public WriterController() {
+        connection = new JdbcWriterRepositoryImpl();
+    }
 
     public Writer createWriter(Writer writer) {
         return connection.save(writer);
