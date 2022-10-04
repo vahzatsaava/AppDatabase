@@ -88,7 +88,6 @@ public class JdbcWriterRepositoryImpl implements WriterRepository {
         try (PreparedStatement statement = JdbcUtils.getPrepareStatement(sql)) {
             statement.setInt(1, id);
             statement.executeUpdate();
-            statement.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

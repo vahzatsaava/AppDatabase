@@ -1,26 +1,24 @@
 package company.model;
 
 import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
 
 public class Post {
     private int id;
     private String content;
-    private Timestamp start;
-    private Timestamp finish;
+    private Date start;
+    private Date finish;
     private List<Label> labels;
 
-    public Post(String content, Timestamp start, Timestamp finish, List<Label> labels) {
+    public Post(String content, Date start, Date finish, List<Label> labels) {
         this.content = content;
         this.start = start;
         this.finish = finish;
         this.labels = labels;
     }
 
-    public Post(int id, String content, Timestamp start, Timestamp finish, List<Label> labels) {
+    public Post(int id, String content, Date start, Date finish, List<Label> labels) {
         this.id = id;
         this.content = content;
         this.start = start;
@@ -44,19 +42,19 @@ public class Post {
         this.content = content;
     }
 
-    public Timestamp getStart() {
+    public Date getStart() {
         return start;
     }
 
-    public void setStart(Timestamp start) {
+    public void setStart(Date start) {
         this.start = start;
     }
 
-    public Timestamp getFinish() {
+    public Date getFinish() {
         return finish;
     }
 
-    public void setFinish(Timestamp finish) {
+    public void setFinish(Date finish) {
         this.finish = finish;
     }
 

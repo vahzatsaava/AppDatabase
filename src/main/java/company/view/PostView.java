@@ -3,13 +3,7 @@ package company.view;
 import company.controller.PostController;
 import company.model.Label;
 import company.model.Post;
-import liquibase.integration.ant.DropAllTask;
-
-import javax.xml.stream.events.Characters;
 import java.sql.Date;
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalTime;
 import java.util.*;
 
 public class PostView implements View<Post> {
@@ -21,9 +15,9 @@ public class PostView implements View<Post> {
         System.out.println("Type the content ");
         String content = scanner.next();
         System.out.println("Type time start");
-        Timestamp start = generateTime();
+        Date start = generateTime();
         System.out.println("Type time finish");
-        Timestamp finish = generateTime();
+        Date finish = generateTime();
         List<Label> labels = generateLabels();
         return controller.createPost(new Post(content, start, finish, labels));
     }
@@ -48,9 +42,9 @@ public class PostView implements View<Post> {
         System.out.println("Type the content");
         String content = scanner.next();
         System.out.println("Type time start");
-        Timestamp start = generateTime();
+        Date start = generateTime();
         System.out.println("Type time finish");
-        Timestamp finish = generateTime();
+        Date finish = generateTime();
         List<Label> labels = generateLabels();
         return controller.updatePost(new Post(id, content, start, finish, labels));
     }
@@ -67,7 +61,7 @@ public class PostView implements View<Post> {
         scanner.close();
     }
 
-    private Timestamp generateTime() {
+    private Date generateTime() {
         String dataFormat = "";
         while (true) {
             System.out.println("Type years");
@@ -88,6 +82,7 @@ public class PostView implements View<Post> {
                 System.out.println("Wrong values of days");
                 continue;
             }
+            /*
             System.out.println("Type hours");
             String hour = scanner.next();
 
@@ -108,11 +103,13 @@ public class PostView implements View<Post> {
                 continue;
             }
 
-            dataFormat = String.format("%s-%s-%s %s:%s:%s",year,month,day, hour, minutes, seconds);
+             */
+
+            dataFormat = String.format("%s-%s-%s",year,month,day);
             break;
         }
 
-        return Timestamp.valueOf(dataFormat);
+        return Date.valueOf(dataFormat);
     }
 
     private List<Label> generateLabels() {

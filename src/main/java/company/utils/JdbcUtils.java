@@ -12,7 +12,7 @@ public class JdbcUtils {
 
     static {
         try {
-            connection = DriverManager.getConnection(DatabaseConfigReader.getConfig(ConfigParametersDB.DATABASE),DatabaseConfigReader.getConfig(ConfigParametersDB.USER),DatabaseConfigReader.getConfig(ConfigParametersDB.PASSWORD));
+            connection = DriverManager.getConnection(DatabaseConfigReader.getConfig(ConfigParametersDB.URL),DatabaseConfigReader.getConfig(ConfigParametersDB.USERNAME),DatabaseConfigReader.getConfig(ConfigParametersDB.PASSWORD));
         } catch (SQLException | IOException e) {
             e.printStackTrace();
         }

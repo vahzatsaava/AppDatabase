@@ -5,6 +5,8 @@ import company.repository.jdbc.JdbcLabelRepositoryImpl;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.extension.Extension;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

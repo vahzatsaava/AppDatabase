@@ -3,14 +3,13 @@ package company.controller;
 import company.model.Label;
 import company.model.Post;
 import company.repository.jdbc.JdbcPostRepositoryImpl;
-import company.repository.jdbc.JdbcPostRepositoryImplTest;
 import org.junit.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +32,7 @@ public class PostControllerTest {
         labels.add(new Label("abc"));
     }
 
-    private final Post post = new Post("Home", new Timestamp(100), new Timestamp(200), labels);
+    private final Post post = new Post("Home", new Date(100), new Date(200), labels);
 
     @Test
     public void createPost_Successful() {
