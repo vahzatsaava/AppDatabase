@@ -1,34 +1,40 @@
 package company.controller;
 
 import company.model.Label;
+import company.repository.LabelRepository;
 import company.repository.jdbc.JdbcLabelRepositoryImpl;
 
 import java.util.List;
 
 public class LabelController {
-    private  JdbcLabelRepositoryImpl jdbcLabelRepositoryImpl;
+    private final LabelRepository labelRepository;
 
     public LabelController() {
-        jdbcLabelRepositoryImpl = new JdbcLabelRepositoryImpl();
+        labelRepository = new JdbcLabelRepositoryImpl();
+    }
+
+    public LabelController(LabelRepository labelRepository) {
+
+        this.labelRepository = labelRepository;
     }
 
     public Label createLabel(Label label) {
-        return jdbcLabelRepositoryImpl.save(new Label(label.getName()));
+        return labelRepository.save(new Label(label.getName()));
     }
 
     public List<Label> getLabels() {
-        return jdbcLabelRepositoryImpl.getAll();
+        return labelRepository.getAll();
     }
 
     public Label update(Label name) {
-        return jdbcLabelRepositoryImpl.update(name);
+        return labelRepository.update(name);
     }
 
     public void delete(Integer id) {
-        jdbcLabelRepositoryImpl.deleteById(id);
+        labelRepository.deleteById(id);
     }
 
     public Label get(Integer id) {
-        return jdbcLabelRepositoryImpl.getById(id);
+        return labelRepository.getById(id);
     }
 }

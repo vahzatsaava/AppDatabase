@@ -2,8 +2,10 @@ package company.view;
 
 import company.controller.WriterController;
 import company.model.Label;
+import company.model.Post;
 import company.model.Writer;
 
+import java.sql.Date;
 import java.util.*;
 
 public class WriterView implements View<Writer> {
@@ -16,9 +18,7 @@ public class WriterView implements View<Writer> {
         String firstName = scanner.next();
         System.out.println("Enter second Name");
         String secondName = scanner.next();
-        List<Label> listOfLabels = createLabels();
-
-        return controller.createWriter(new Writer(firstName, secondName, listOfLabels));
+        return controller.createWriter(new Writer(firstName, secondName));
     }
 
     @Override
@@ -41,9 +41,9 @@ public class WriterView implements View<Writer> {
         String firstName = scanner.next();
         System.out.println("Enter lastName");
         String lastName = scanner.next();
-        List<Label> listOfLabels = createLabels();
+        List<Post> listOfPost = createPost();
 
-        return controller.upDate(new Writer(id, firstName, lastName, listOfLabels));
+        return controller.upDate(new Writer(id, firstName, lastName, listOfPost));
     }
 
     @Override
@@ -71,6 +71,57 @@ public class WriterView implements View<Writer> {
         }
         return labels;
     }
+    private List<Post> createPost() {
+        System.out.println("How many posts you want to create");
+        int countPost = scanner.nextInt();
+        List<Post> labels = new ArrayList<>();
+        while (labels.size() < countPost) {
+            int id = scanner.nextInt();
+            System.out.println("Enter post content");
+            String post = scanner.next();
+            System.out.println("Enter created time");
+            java.sql.Date created = generateTime();
+            System.out.println("Enter updated time");
+            Date updated = generateTime();
+            System.out.println("Enter writers id");
+            int writerId = scanner.nextInt();
+            List<Label> labels1 = createLabels();
+
+
+            labels.add(new Post(id,post,created,updated,writerId,labels1));
+        }
+        return labels;
+    }
+
+    private Date generateTime() {
+        String dataFormat = "";
+        while (true) {
+            System.out.println("Type years");
+            String year = scanner.next();
+            if (year.length() != 4) {
+                System.out.println("Wrong values of hours");
+                continue;
+            }
+            System.out.println("Type months");
+            String month = scanner.next();
+            if (month.length() != 2) {
+                System.out.println("Wrong values of months");
+                continue;
+            }
+            System.out.println("Type days");
+            String day = scanner.next();
+            if (day.length() != 2) {
+                System.out.println("Wrong values of days");
+                continue;
+            }
+
+            dataFormat = String.format("%s-%s-%s",year,month,day);
+            break;
+        }
+
+        return Date.valueOf(dataFormat);
+    }
+
 
     private int generateIdForLabels(List<Label> labels) {
         Label maxLabel = labels.stream().max(Comparator.comparing(Label::getId)).orElse(null);

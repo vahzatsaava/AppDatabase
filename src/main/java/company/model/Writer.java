@@ -5,21 +5,20 @@ import java.util.Objects;
 
 public class Writer {
     private Integer id;
-    private String firstName;
-    private String lastName;
-    private List<Label> posts;
+    private final String firstName;
+    private final String lastName;
+    private List<Post> posts;
 
-    public Writer(Integer id, String firstName, String lastName, List<Label> posts) {
+    public Writer(Integer id, String firstName, String lastName, List<Post> posts) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.posts = posts;
     }
 
-    public Writer(String firstName, String lastName, List<Label> posts) {
+    public Writer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.posts = posts;
     }
 
     public Integer getId() {
@@ -34,7 +33,7 @@ public class Writer {
         return lastName;
     }
 
-    public List<Label> getPosts() {
+    public List<Post> getPosts() {
         return posts;
     }
 
@@ -42,7 +41,7 @@ public class Writer {
     public String toString() {
         return "Writer{" +
                 "id=" + id +
-                "firstName='" + firstName + '\'' +
+                " firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", posts=" + posts +
                 '}';

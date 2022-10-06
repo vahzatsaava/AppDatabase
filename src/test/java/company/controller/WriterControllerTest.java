@@ -1,14 +1,16 @@
 package company.controller;
 
 import company.model.Label;
+import company.model.Post;
 import company.model.Writer;
-import company.repository.jdbc.JdbcWriterRepositoryImpl;
+import company.repository.WriterRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,21 +22,30 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class WriterControllerTest {
     @Mock
-    private JdbcWriterRepositoryImpl writerRepository;
+    private WriterRepository writerRepository;
 
     @InjectMocks
     private WriterController controller;
-
     private static final List<Label> labels = new ArrayList<>();
+
     static {
-        labels.add(new Label("abc"));
+        labels.add(new Label("Gregor"));
     }
-    private final Writer writer = new Writer("Roberto","Carlos",labels);
+
+    private static final List<Post> posts = new ArrayList<>();
+
+    static {
+        posts.add(new Post(1, "Roman", new Date(200), new Date(300),2, labels));
+    }
+
+    private final Writer writer = new Writer("Roberto", "Carlos");
+
     @Test
     public void createWriter_Successful() {
         when(writerRepository.save(any())).thenReturn(writer);
-        assertEquals("Roberto",controller.createWriter(any()).getFirstName());
+        assertEquals("Roberto", controller.createWriter(any()).getFirstName());
     }
+
     @Test
     public void createWriter_UnSuccessful() {
         when(writerRepository.save(any())).thenReturn(writer);

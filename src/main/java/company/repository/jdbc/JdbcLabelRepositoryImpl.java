@@ -2,11 +2,7 @@ package company.repository.jdbc;
 
 import company.model.Label;
 import company.repository.LabelRepository;
-import company.utils.ConfigParametersDB;
-import company.utils.DatabaseConfigReader;
 import company.utils.JdbcUtils;
-
-import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +11,7 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label getById(Integer id) {
-        String sql = "SELECT * FROM label WHERE id = ?";
+        String sql = "SELECT * FROM labels WHERE id = ?";
 
         try (PreparedStatement statement = JdbcUtils.getPrepareStatement(sql))
          {
@@ -38,9 +34,9 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
     @Override
     public List getAll() {
         List<Label> list = new ArrayList<>();
-            String sql = "SELECT * FROM label";
+            String sql = "SELECT * FROM labels";
         try (PreparedStatement statement = JdbcUtils.getPrepareStatement(sql)) {
-            ResultSet set = statement.executeQuery("SELECT * FROM label");
+            ResultSet set = statement.executeQuery("SELECT * FROM labels");
             while (set.next()) {
                 int id = set.getInt("id");
                 String name = set.getString("name");
@@ -56,7 +52,7 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label save(Label label) {
-        String sql = "INSERT INTO LABEL(name) VALUES (?)";
+        String sql = "INSERT INTO labels(name) VALUES (?)";
         try (PreparedStatement statement = JdbcUtils.getPrepareStatement(sql)) {
             statement.setString(1, label.getName());
             statement.executeUpdate();
@@ -69,7 +65,7 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public Label update(Label label) {
-        String sql = "UPDATE label SET name = ? WHERE id = ?";
+        String sql = "UPDATE labels SET name = ? WHERE id = ?";
         try (PreparedStatement statement = JdbcUtils.getPrepareStatement(sql)) {
             statement.setString(1, label.getName());
             statement.setInt(2, label.getId());
@@ -82,7 +78,7 @@ public class JdbcLabelRepositoryImpl implements LabelRepository {
 
     @Override
     public void deleteById(Integer id) {
-        String sql = "DELETE FROM label WHERE id = ?";
+        String sql = "DELETE FROM labels WHERE id = ?";
         try (PreparedStatement statement = JdbcUtils.getPrepareStatement(sql)) {
             statement.setInt(1, id);
             statement.executeUpdate();

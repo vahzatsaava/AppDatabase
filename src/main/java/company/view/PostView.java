@@ -18,8 +18,9 @@ public class PostView implements View<Post> {
         Date start = generateTime();
         System.out.println("Type time finish");
         Date finish = generateTime();
-        List<Label> labels = generateLabels();
-        return controller.createPost(new Post(content, start, finish, labels));
+        System.out.println("Type writers number");
+        int writerID = scanner.nextInt();
+        return controller.createPost(new Post(content, start, finish,writerID));
     }
 
     @Override
@@ -45,8 +46,10 @@ public class PostView implements View<Post> {
         Date start = generateTime();
         System.out.println("Type time finish");
         Date finish = generateTime();
+        System.out.println("Type writers number");
+        int writerId = scanner.nextInt();
         List<Label> labels = generateLabels();
-        return controller.updatePost(new Post(id, content, start, finish, labels));
+        return controller.updatePost(new Post(id, content, start, finish,writerId, labels));
     }
 
     @Override
@@ -82,28 +85,6 @@ public class PostView implements View<Post> {
                 System.out.println("Wrong values of days");
                 continue;
             }
-            /*
-            System.out.println("Type hours");
-            String hour = scanner.next();
-
-            if (hour.length() != 2 || !Character.isDigit(hour.charAt(0)) || !Character.isDigit(hour.charAt(1))) {
-                System.out.println("Wrong values of hours");
-                continue;
-            }
-            System.out.println("Type minutes");
-            String minutes = scanner.next();
-            if (minutes.length() != 2 || !Character.isDigit(minutes.charAt(0)) || !Character.isDigit(minutes.charAt(1))) {
-                System.out.println("Wrong values of minutes");
-                continue;
-            }
-            System.out.println("Type seconds");
-            String seconds = scanner.next();
-            if (seconds.length() != 2 || !Character.isDigit(seconds.charAt(0)) || !Character.isDigit(seconds.charAt(1))) {
-                System.out.println("Wrong values of seconds");
-                continue;
-            }
-
-             */
 
             dataFormat = String.format("%s-%s-%s",year,month,day);
             break;

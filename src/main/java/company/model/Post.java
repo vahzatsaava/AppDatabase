@@ -7,22 +7,32 @@ import java.util.Objects;
 public class Post {
     private int id;
     private String content;
-    private Date start;
-    private Date finish;
+    private Date created;
+    private Date updated;
+    private int writer_id;
     private List<Label> labels;
 
-    public Post(String content, Date start, Date finish, List<Label> labels) {
+    public Post(String content, Date created, Date updated,int writer_id) {
         this.content = content;
-        this.start = start;
-        this.finish = finish;
+        this.created = created;
+        this.updated = updated;
+        this.writer_id = writer_id;
+    }
+
+    public Post(int id, String content, Date created, Date updated,int writer_id, List<Label> labels) {
+        this.id = id;
+        this.content = content;
+        this.created = created;
+        this.updated = updated;
+        this.writer_id = writer_id;
         this.labels = labels;
     }
 
-    public Post(int id, String content, Date start, Date finish, List<Label> labels) {
-        this.id = id;
+    public Post(String content, Date created, Date updated,int writer_id, List<Label> labels) {
         this.content = content;
-        this.start = start;
-        this.finish = finish;
+        this.created = created;
+        this.updated = updated;
+        this.writer_id = writer_id;
         this.labels = labels;
     }
 
@@ -42,20 +52,20 @@ public class Post {
         this.content = content;
     }
 
-    public Date getStart() {
-        return start;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setStart(Date start) {
-        this.start = start;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public Date getFinish() {
-        return finish;
+    public Date getUpdated() {
+        return updated;
     }
 
-    public void setFinish(Date finish) {
-        this.finish = finish;
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
     public List<Label> getLabels() {
@@ -66,13 +76,22 @@ public class Post {
         this.labels = labels;
     }
 
+    public int getWriter_id() {
+        return writer_id;
+    }
+
+    public void setWriter_id(int writer_id) {
+        this.writer_id = writer_id;
+    }
+
     @Override
     public String toString() {
         return "Post{" +
                 "id=" + id +
                 ", content='" + content + '\'' +
-                ", start=" + start +
-                ", finish=" + finish +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", writer_id=" + writer_id +
                 ", labels=" + labels +
                 '}';
     }
@@ -82,12 +101,12 @@ public class Post {
         if (this == o) return true;
         if (!(o instanceof Post)) return false;
         Post post = (Post) o;
-        return getId() == post.getId() && Objects.equals(getContent(), post.getContent()) && Objects.equals(getStart(), post.getStart()) && Objects.equals(getFinish(), post.getFinish()) && Objects.equals(getLabels(), post.getLabels());
+        return getId() == post.getId() && Objects.equals(getContent(), post.getContent()) && Objects.equals(getCreated(), post.getCreated()) && Objects.equals(getUpdated(), post.getUpdated()) && Objects.equals(getLabels(), post.getLabels());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getContent(), getStart(), getFinish(), getLabels());
+        return Objects.hash(getId(), getContent(), getCreated(), getUpdated(), getLabels());
     }
 
 }

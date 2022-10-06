@@ -1,34 +1,38 @@
 package company.controller;
 
 import company.model.Writer;
+import company.repository.WriterRepository;
 import company.repository.jdbc.JdbcWriterRepositoryImpl;
 
 import java.util.List;
 
 public class WriterController {
-    private JdbcWriterRepositoryImpl connection;
+    private final WriterRepository writerRepository;
 
     public WriterController() {
-        connection = new JdbcWriterRepositoryImpl();
+        writerRepository = new JdbcWriterRepositoryImpl();
+    }
+    public WriterController(WriterRepository writerRepository){
+        this.writerRepository = writerRepository;
     }
 
     public Writer createWriter(Writer writer) {
-        return connection.save(writer);
+        return writerRepository.save(writer);
     }
 
     public List<Writer> getWriters() {
-        return connection.getAll();
+        return writerRepository.getAll();
     }
 
     public Writer upDate(Writer writer) {
-        return connection.update(writer);
+        return writerRepository.update(writer);
     }
 
     public Writer get(Integer id) {
-        return connection.getById(id);
+        return writerRepository.getById(id);
     }
 
     public void delete(Integer id) {
-        connection.deleteById(id);
+        writerRepository.deleteById(id);
     }
 }

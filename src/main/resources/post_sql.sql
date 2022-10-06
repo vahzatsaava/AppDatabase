@@ -1,8 +1,0 @@
-CREATE TABLE IF NOT EXISTS post
-(
-    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL ,
-    content VARCHAR(50) NOT NULL ,
-    startTime DATE NOT NULL ,
-    finishTime DATE NOT NULL,
-    posts VARCHAR(200) NOT NULL
- )
